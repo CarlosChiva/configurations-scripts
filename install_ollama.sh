@@ -23,7 +23,18 @@ echo "Running Ollama installation script..."
 curl -fsSL https://ollama.com/install.sh | sh
 
 echo "Updating ollama.service configuration..."
-sed -i '/\[Install\]/i Environment="OLLAMA_HOST=0.0.0.0"' /etc/systemd/system/ollama.service
+
+if [[ $# -gt 0 ]]; then
+    echo "Adding custom environment variables..."
+    for var in "$@"; do
+        if [[ $var =~ ^[A-Za-z_][A-Za-z0-9_]*= ]]; then
+            echo "  Adding: $var"
+            sed -i '/\[Install\]/i Environment="'"$var"'"' /etc/systemd/system/ollama.service
+        else
+            echo "  WARNING: Skipping invalid variable: $var"
+        fi
+    done
+fi
 
 echo "Configuration updated successfully!"
 echo "Reloading systemd daemon configuration..."

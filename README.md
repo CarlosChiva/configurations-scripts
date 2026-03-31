@@ -13,8 +13,20 @@ Instala y configura el servicio Ollama en el sistema.
 - Acceso a /etc/systemd/system/
 
 **Uso:**
+
+Para instalar/actualizar 
 ```bash
 sudo ./install_ollama.sh
+```
+Si se quiere añadir alguna variable de entorno se puede añadir como argumento como por ejemplo:
+
+```bash
+sudo ./install_ollama.sh OLLAMA_HOST=0.0.0.0
+```
+Tambien admite pasarle multiples variables de entorno:
+
+```bash
+sudo ./install_ollama.sh OLLAMA_HOST=0.0.0.0 CUDA_VISIBLE_DEVICES=0
 ```
 
 **Descripción:**
@@ -49,15 +61,11 @@ Actualiza todos los archivos .md que contienen la clave `model:` en el directori
 
 **Uso:**
 ```bash
-./cambiar_modelo.sh "google/gemma-2"
+./cambiar_modelo.sh 
 ```
 
-**Ejemplos:**
-```bash
-./cambiar_modelo.sh "google/gemma-2"
-./cambiar_modelo.sh "meta/llama-3"
-./cambiar_modelo.sh "openai/gpt4"
-```
+El script te mostrará la lista de modleos encontrados y se puede seleccionar que modelos se quiere cambiar y por cual proveedor/modelo.
+Tambien se puede cambiar los agentes seleccionados por el proveedor/modelo escrito o cambiarlos individualmente si se prefiere.
 
 **Descripción:**
 Busca recursivamente todos los archivos .md en `~/.config/opencode/agents` y reemplaza el valor de `model:` por el proporcionado. Solo actualiza archivos que aún no tengan el modelo especificado.
