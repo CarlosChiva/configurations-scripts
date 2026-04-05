@@ -46,7 +46,7 @@ show_agent_menu() {
         fi
     done
     echo ""
-    echo "Selecciona los agentes (deja vacío para continuar):"
+    echo "Selecciona los agentes (escribe "all" para seleccionarlos todos):"
 }
 
 # Función para seleccionar agente
